@@ -1,95 +1,189 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-*{
+/* Estilo geral */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f6f6fb;
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-body{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background: linear-gradient(120deg, #f8e24e, #ff2525da);
-}
-#containerr{
-    background-color: #f0f8ff;
-    border-radius: 30px;
-    padding: 10px;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
-}
-#search{
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border: 1px solid #bdbdbdbd;
-    border-radius: 20px;
-    padding: 4px 12px;
-}
-#search input{
-    border: none;
-    background-color: transparent;
-    font-size: 16px;
-    width: 2000px;
-}
-#search input:focus-visible{
-    outline: none;
-}
-#search button{
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-}
-#dados{
-    margin-top: 20px;
-}
-#dados #title {
+    padding: 20px;
     text-align: center;
-    margin-bottom: 15px;
-    font-weight: 700;
-    color: #372f3f;
+    color: #333;
 }
-#dados.show{
+
+/* Título principal */
+h1 {
+    color: #4a3aff;
+}
+
+/* Container principal */
+#entrada {
+    margin-top: 30px;
+}
+
+/* Card central */
+.entrada {
+    background: white;
+    width: 320px;
+    margin: 0 auto;
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+/* Títulos */
+h2 {
+    color: #444;
+    font-size: 1.3em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Labels e inputs */
+label {
     display: block;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 5px;
 }
-#other_infos{
+
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+/* Botão */
+button {
+    width: 100%;
     margin-top: 20px;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px
-}
-#other_infos .info{
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    padding: 4px 10px;
+    padding: 10px;
+    background-color: #6949ff;
+    color: white;
+    border: none;
     border-radius: 8px;
-    box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
-    background-color: #fff;
-    gap: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+    transition: background 0.3s ease;
 }
-#other_infos .info h2{
-    font-size: 13px;
-    font-weight: 600;
+
+button:hover {
+    background-color: #5333cc;
 }
-#other_infos .info i{
+
+/* Resultados */
+#resultados {
+    margin-top: 40px;
+    text-align: left;
+    max-width: 1200px; /* Aumente para 1200px ou mais */
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%; /* Adicione isso */
+}
+
+/* Container principal dos resultados */
+.grupo-resultado {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px; /* Reduzi o gap para caber melhor */
+    margin-top: 20px;
+    width: 100%;
+    max-width: 1200px; /* Aumentei a largura máxima */
+    margin-left: auto;
+    margin-right: auto;
+}
+/* Card principal de cada filme */
+.card-filme {
+    background: #fff;
+    border-radius: 16px;
+    width: calc(33.333% - 20px); /* 3 colunas com gap */
+    min-width: 300px; /* Largura mínima */
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box; /* Importante para cálculo de width */
+}
+
+.card-filme:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.card-filme h3 {
     text-align: center;
-    font-size: 20px;
-    width: 20%;
+    color: #333;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
 }
-#lograd{
-    color: #000000;
+
+.info-filme {
+    text-align: center;
+    color: #555;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
 }
-#ba{
-    color: #c03535;
+
+.similares {
+    border-top: 1px solid #eee;
+    padding-top: 10px;
 }
-#local{
-    color: #024767;
+
+.similares h4 {
+    text-align: center;
+    color: #6b4eff;
+    font-size: 1rem;
+    margin-bottom: 10px;
 }
-#uff{
-    color: #7c3aed;
+
+.similares ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
-#cel{
-    color: #fcac00;
+
+.similares li {
+    background-color: #f3f2ff;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    padding: 8px;
+    text-align: center;
+    font-size: 0.9rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.similares li span {
+    display: block;
+    color: #777;
+    font-size: 0.8rem;
+}
+
+/* Ajustes para telas médias (2 colunas) */
+@media (max-width: 1024px) {
+    .card-filme {
+        width: calc(50% - 20px); /* 2 colunas com gap */
+    }
+}
+
+/* Ajustes para mobile (1 coluna) */
+@media (max-width: 768px) {
+    .grupo-resultado {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card-filme {
+        width: 90%;
+        min-width: unset;
+    }
+}
+
+/* Ajustes para telas muito pequenas */
+@media (max-width: 480px) {
+    .card-filme {
+        width: 100%;
+    }
 }

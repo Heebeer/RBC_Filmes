@@ -1,16 +1,6 @@
-# Consulta_CEP
-Consulta de CEP com API VIACEP
+# RBC_Film
+Program using javascript and html for chose simmilar films on database
 
-- Utiliza Local Storage para armazenar os CEPs, utilizando como chave
-- Utiliza Bootstrap para criar a interface de consulta
-- Quando consulta o botão fica desabilitado, só habilita novamente quando a consulta acaba
-- Apresenta as seguintes informações quando consultado:
-  - Cep
-  - Logradouro
-  - Bairro
-  - Localidade
-  - UF
-  - DDD
+Five input attributes are entered, which return three movies.
 
-API
-- https://viacep.com.br
+After returning the movies, the program automatically displays five movies (for each of the three movies) that contain similarities.

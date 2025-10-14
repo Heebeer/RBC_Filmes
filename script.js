@@ -96,6 +96,7 @@ let filmes = [];
           });
 
           localStorage.setItem('filmesCSV', JSON.stringify(filmes));
+          localStorage.setItem('minMaxCSV', JSON.stringify(minMax));
           document.getElementById("entrada").style.display = "block";
           alert(`Base carregada (${filmes.length} filmes). Dados salvos localmente!`);
         }
@@ -106,6 +107,7 @@ let filmes = [];
     document.getElementById("buscar").addEventListener("click", () => {
       if (filmes.length === 0 && localStorage.getItem("filmesCSV")) {
         filmes = JSON.parse(localStorage.getItem("filmesCSV"));
+        minMax = JSON.parse(localStorage.getItem("minMaxCSV"));
       }
 
       const entrada = {

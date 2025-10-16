@@ -1,3 +1,6 @@
+
+// Cria um array para enfileirar os filmes
+// Define o menor valor e o maior valor, incluindo-o no Infinity
 let filmes = [];
 let minMax = {
     ano: { min: Infinity, max: -Infinity },
@@ -6,6 +9,7 @@ let minMax = {
     numAvaliacoes: { min: Infinity, max: -Infinity }
 };
 
+// Define a medida de peso dos atributos
 const pesos = {
     genero: 0.4,
     ano: 0.2,
@@ -14,23 +18,30 @@ const pesos = {
     numAvaliacoes: 0.1
 };
 
+// Compara os gerenos para correlação
+// Se os dois primeiro generos retornarem nulo/zero, elimina a similaridade
+// Se retornar meio termo, retorna 0.6 de similaridade
+// Se os generos forem iguais, retona 1
 function simGenero(g1, g2) {
     if (!g1 || !g2) return 0;
-    const a = g1.toLowerCase().split(',').map(x => x.trim());
-    const b = g2.toLowerCase().split(',').map(x => x.trim());
+    const a = g1.toLowerCase().split(',').map(x => x.trim()); //converte para minusculo, remove o espaço e insere virgula
+    const b = g2.toLowerCase().split(',').map(x => x.trim()); //converte para minusculo, remove o espaço e insere virgula
     const inter = a.filter(x => b.includes(x));
     if (inter.length > 0) return 1;
     if (a.some(x => b.some(y => y.includes(x)))) return 0.6;
     return 0;
 }
 
+// Calcula a similaridade nos valores
 function simNum(v1, v2, min, max) {
     if (max === min) return 1;
     const n1 = (v1 - min) / (max - min);
     const n2 = (v2 - min) / (max - min);
-    return 1 - Math.abs(n1 - n2);
+    return 1 - Math.abs(n1 - n2); // retorna 1 - a similaridade
 }
 
+//Realiza a similaridade global
+//Pega a entrada, o valor da entrada e multiplica pelo peso do atributo
 function simGlobal(f, entrada) {
     return (
         simGenero(entrada.genero, f.genero) * pesos.genero +
@@ -41,6 +52,7 @@ function simGlobal(f, entrada) {
     );
 }
 
+// Calcula os top 5 similares, remove o titulo para não repetir e retorna uma lista em ordem crescente
 function topSimilares(entrada, topN = 5, excluirTitulo = "") {
     const lista = filmes
         .filter(f => f.titulo !== excluirTitulo)
@@ -52,6 +64,7 @@ function topSimilares(entrada, topN = 5, excluirTitulo = "") {
     return lista.slice(0, topN);
 }
 
+// Nesta parte, é feito o upload | conversão do CSV 
 document.getElementById("upload-csv").addEventListener("change", e => {
     const file = e.target.files[0];
     if (!file) return;
@@ -94,6 +107,9 @@ document.getElementById("upload-csv").addEventListener("change", e => {
                 minMax.numAvaliacoes.min = Math.min(minMax.numAvaliacoes.min, f.numAvaliacoes);
                 minMax.numAvaliacoes.max = Math.max(minMax.numAvaliacoes.max, f.numAvaliacoes);
             });
+            
+            // Feita a inserção do CSV no localstorage, ele grava mas não está persistindo na pagina
+            // Se atualizada a pagina, ele apaga os dados e precisa "importar" sendo que ja está importado    
 
             localStorage.setItem('filmesCSV', JSON.stringify(filmes));
             document.getElementById("entrada").style.display = "block";
@@ -102,7 +118,7 @@ document.getElementById("upload-csv").addEventListener("change", e => {
     });
 });
 
-// NOVA EXIBIÇÃO EM CARDS
+// Configura a exibição no card
 document.getElementById("buscar").addEventListener("click", () => {
     if (filmes.length === 0 && localStorage.getItem("filmesCSV")) {
         filmes = JSON.parse(localStorage.getItem("filmesCSV"));
@@ -120,6 +136,8 @@ document.getElementById("buscar").addEventListener("click", () => {
     divRes.innerHTML = "";
     divRes.className = "grupo-resultado";
 
+
+    //Define os top3 filmes
     const top3 = topSimilares(entrada, 3);
 
     top3.forEach((item, i) => {
@@ -141,6 +159,8 @@ document.getElementById("buscar").addEventListener("click", () => {
 
         const similares5 = topSimilares(item.filme, 5, item.filme.titulo);
         const ul = card.querySelector(`#similares-${i}`);
+
+        //Define os top3 filmes
 
         similares5.forEach(s => {
             const li = document.createElement("li");
